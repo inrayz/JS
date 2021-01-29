@@ -1,7 +1,6 @@
 let result = 1;
 let num = 266219;
-num = String(num);
-num = num.split('');
+num = String(num).split('');
 console.log(num);
 for (let i = 0; i < num.length; i++) {
   result *= num[i];
