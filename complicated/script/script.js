@@ -1,34 +1,32 @@
+let russianLang = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+let englishLang = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
 // С помощью if
-let Lang = 'en';
+let lang = confirm('Язык страницы русский?');
 
-if (Lang == 'ru') {
-  arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+if (lang == true) {
+  arr = russianLang;
 }
-if (Lang == 'en') {
-  arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+else if (lang == false) {
+  arr = englishLang;
 }
 console.log(arr);
 
 
-
 // С помощью switch
-let lanG = 'ru';
 
-	switch (lanG) {
-		case 'ru':
-			arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+	switch (lang) {
+		case true :
+			arr = russianLang;
 		break;
-		case 'en':
-			arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+		case false:
+			arr = englishLang;
 		break;
   }
   console.log(arr);
 
 
-
 // С помощью многомерного массива
 let langArr = [];
-langArr ['ru'] = ['Пн','Вт','СР','Чт','Пт','Сб','Вс'];
-langArr ['en'] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-let lang = 'ru';
+langArr [true] = russianLang;
+langArr [false] = englishLang;
 console.log(langArr[lang]);
