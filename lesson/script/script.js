@@ -11,7 +11,7 @@ let mission = 120000;
 let period = 5;
 let budgetMonth = money - amount1 - amount2;
 let idea = Math.ceil(mission/budgetMonth);
-let budgetDay = budgetMonth/30;
+let budgetDay = Math.floor(budgetMonth/30);
 
 
 console.log('Период равен', period, 'месяцев');
