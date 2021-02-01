@@ -30,3 +30,15 @@ let langArr = [];
 langArr [true] = russianLang;
 langArr [false] = englishLang;
 console.log(langArr[lang]);
+
+
+// Вторая часть
+	
+let namePerson = prompt('Введите ваше имя');
+let result;
+
+result = (namePerson == 'Артем') ? 'Директор' :
+	(namePerson == 'Максим') ? 'Преподаватель' :
+	'Студент';
+
+console.log(result);
