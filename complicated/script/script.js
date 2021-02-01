@@ -1,35 +1,34 @@
-let result = 1;
-let num = 266219;
-num = String(num).split('');
-console.log(num);
-for (let i = 0; i < num.length; i++) {
-  result *= num[i];
+// С помощью if
+let Lang = 'en';
+
+if (Lang == 'ru') {
+  arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 }
-console.log(result);
-
-result = result**3;
-console.log(result);
-result = String(result);
-console.log(result.slice(0, 2)); 
+if (Lang == 'en') {
+  arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+}
+console.log(arr);
 
 
-// // let num = 12345;
-// // let str = String(num);
-// // let arr = str.split('');
 
-// // console.log(arr);
+// С помощью switch
+let lanG = 'ru';
 
-// let result = 1;
-// let num = 266219;
-// num = String(num);
-// console.log(num);
-// console.log(num.split(''));
-// for (let i = 0; i < num.length; i++) {
-//   result *= num[i];
-// }
-// console.log(result);
+	switch (lanG) {
+		case 'ru':
+			arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+		break;
+		case 'en':
+			arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+		break;
+  }
+  console.log(arr);
 
-// result = result**3;
-// console.log(result);
-// result = String(result);
-// console.log(result.slice(0, 2)); 
+
+
+// С помощью многомерного массива
+let langArr = [];
+langArr ['ru'] = ['Пн','Вт','СР','Чт','Пт','Сб','Вс'];
+langArr ['en'] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+let lang = 'ru';
+console.log(langArr[lang]);
