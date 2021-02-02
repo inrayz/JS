@@ -19,19 +19,19 @@ showTypeOf(money);
 showTypeOf(income);
 showTypeOf(deposit);
 
-let getExpensesMonth = function (a, b) {
-  return a + b; 
+let getExpensesMonth = function (amount1, amount2) {
+  return amount1 + amount2; 
 };
 
-let getAccumulatedMonth = function (a, b, c) {
-  return a - b - c;
+let getAccumulatedMonth = function (money, amount1, amount2) {
+  return money - amount1 - amount2;
 };
 let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2);
 
 let budgetDay = Math.floor(accumulatedMonth/30);
 
-let getTargetMonth = function (a, b) {
-  return Math.ceil(a / b);
+let getTargetMonth = function (mission, accumulatedMonth) {
+  return Math.ceil(mission / accumulatedMonth);
 };
 
 let getStatusIncome = function () {
