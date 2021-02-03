@@ -7,22 +7,18 @@ let isNumber = function (n) {
 let money;
 
 let start = function() {
-  money = +prompt('Ваш месячный доход?');
-
-  while (!isNumber(money)){
+  do{
     money = prompt('Ваш месячный доход?');
   }
-};
+  while (!isNumber(money));
+  money = +money;
+}; 
 
 start();
 
 let income = 'Фриланс';
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 let deposit = confirm('Есть ли у вас депозит в банке?');
-// let expenses1 = prompt('Введите обязательную статью расходов?');
-// let amount1 = +prompt('Во сколько это обойдется?');
-// let expenses2 = prompt('Введите обязательную статью расходов?');
-// let amount2 = +prompt('Во сколько это обойдется?'); 
 let mission = 120000;
 let period = 5;
 
@@ -36,20 +32,21 @@ showTypeOf(deposit);
 
 let expenses = [];
 
+let temp;
+
 let getExpensesMonth = function () {
 
   let sum = 0;
-
+  
   for (let i = 0; i < 2; i++) {
-
-      expenses [i] = prompt('Введите обязательную статью расходов?');
+    expenses [i] = prompt('Введите обязательную статью расходов?');
       
-      sum += +prompt('Во сколько это обойдется?');
-      
-      while (!isNumber(sum)){
-        sum = prompt('Во сколько это обойдется?');
-      }
-  };
+    do{
+      temp = prompt('Во сколько это обойдется?')
+    } while(!isNumber(temp));
+    sum += +temp;
+  }
+  
   return sum; 
 };
 
@@ -65,6 +62,7 @@ let budgetDay = Math.floor(accumulatedMonth/30);
 let getTargetMonth = function () {
   return Math.ceil(mission / accumulatedMonth);
 };
+
 
 let getStatusIncome = function () {
   if (budgetDay >= 1200) {
@@ -87,25 +85,3 @@ if (getTargetMonth() > 0){
   console.log('Цель не будет достигнута');
 }
 console.log(getStatusIncome());
-
-
-
-
-
-
-
-
-// console.log('Период равен', period, 'месяцев');
-// console.log('Цель заработать', mission, 'рублей');
-// console.log(addExpenses);
-// console.log('Бюджет на месяц:', budgetMonth);
-// console.log('Цель будет достигнута за', idea, 'месяцев(-а)');
-// console.log(addExpenses.split(', '));
-// console.log(deposit);
-// console.log(expenses1);
-// console.log(amount1);
-// console.log(expenses2);
-// console.log(amount2);
-
-
-
