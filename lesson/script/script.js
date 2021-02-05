@@ -15,7 +15,7 @@ let money,
 start();
 
 
-let expenses = [];
+let exps = [];
 
 let temp;
 
@@ -38,12 +38,14 @@ let appData = {
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let sum = 0;
           for (let i = 0; i < 2; i++) {
-            expenses [i] = prompt('Введите обязательную статью расходов?');
+            exps [i] = prompt('Введите обязательную статью расходов?');
           do{
             temp = prompt('Во сколько это обойдется?')
           } while(!isNumber(temp));
           appData.sum += +temp;
-          } 
+          appData.expenses[exps[i]] = temp;
+          appData.expenses[exps[i]] = temp;
+          }
         return sum; 
     },
     getExpensesMonth: function () {
@@ -86,3 +88,4 @@ if (appData.getTargetMonth() > 0){
   console.log('Цель не будет достигнута');
 }
 console.log(getStatusIncome());
+
