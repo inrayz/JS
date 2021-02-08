@@ -28,12 +28,30 @@ let appData = {
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
+    persentDeposit: 0,
+    moneyDeposit: 0,
+
     asking: function(){
-        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-        appData.addExpenses = addExpenses.toLowerCase().split(',');
+
+        if(confirm('Есть ли у вас дополнительный источник заработка?')){
+          let itemIncome;
+          let cashIncome;
+          do {itemIncome = prompt('Какой у вас дополнительный зароботок?');}
+          while(isNumber(itemIncome));
+          do{cashIncome = prompt('Сколько в месяц вы на это зарабатываете?');}
+          while(!isNumber(cashIncome));
+          appData.income[itemIncome] = cashIncome;
+        }
+
+        let addExpenses;
+        do{addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');}
+        while(isNumber(addExpenses));
+        appData.addExpenses = addExpenses.toLowerCase();
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
           for (let i = 0; i < 2; i++) {
-           const exps = prompt('Введите обязательную статью расходов?');
+           let exps;
+           do{exps = prompt('Введите обязательную статью расходов?');}
+          while(isNumber(exps)); 
           do{
             temp = prompt('Во сколько это обойдется?')
           } while(!isNumber(temp));
@@ -65,6 +83,17 @@ let appData = {
         return ('Что-то пошло не так');
       }
     },
+    getInfoDeposit: function(){
+      if(appData.deposit){
+        do{appData.percentDeposit = prompt('Какой годовой процент');}
+        while(!isNumber(appData.percentDeposit));
+        do{appData.moneyDeposit = prompt('Какая сумма заложена');}
+        while(!isNumber(appData.moneyDeposit));
+      }
+    },
+    calcSavedMoney: function(){
+      return appData.budgetMonth * appData.period;
+    }
 };
 
 appData.asking();
@@ -89,3 +118,7 @@ console.log('Наша программа включает в себя данны
 for (let key in appData){
   console.log('Свойство: ' + key + ' Значение: ' + appData[key]);
 }
+appData.getInfoDeposit();
+appData.calcSavedMoney();
+
+console.log(appData.addExpenses.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(', '));
