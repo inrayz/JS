@@ -37,7 +37,7 @@ let appData = {
           let itemIncome;
           let cashIncome;
           do {itemIncome = prompt('Какой у вас дополнительный зароботок?');}
-          while(isNumber(itemIncome));
+          while(isNumber(itemIncome) || itemIncome.trim() === '');
           do{cashIncome = prompt('Сколько в месяц вы на это зарабатываете?');}
           while(!isNumber(cashIncome));
           appData.income[itemIncome] = cashIncome;
@@ -45,13 +45,15 @@ let appData = {
 
         let addExpenses;
         do{addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');}
-        while(isNumber(addExpenses));
-        appData.addExpenses = addExpenses.toLowerCase();
+        while(isNumber(addExpenses) || addExpenses.trim() === '');
+        appData.addExpenses = addExpenses.split(',');
+        appData.addExpenses = appData.addExpenses.map(item => item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.trim().toLowerCase().slice(1));
+        console.log(appData.addExpenses);
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
           for (let i = 0; i < 2; i++) {
            let exps;
            do{exps = prompt('Введите обязательную статью расходов?');}
-          while(isNumber(exps)); 
+          while(isNumber(exps) || exps.trim() === ''); 
           do{
             temp = prompt('Во сколько это обойдется?')
           } while(!isNumber(temp));
@@ -121,4 +123,6 @@ for (let key in appData){
 appData.getInfoDeposit();
 appData.calcSavedMoney();
 
-console.log(appData.addExpenses.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(', '));
+// console.log(appData.addExpenses.split(',').map(word => word[0].toUpperCase() + word.substring(1)).join(', '));
+
+
