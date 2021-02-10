@@ -77,5 +77,5 @@ let createGame = function(){
   return getNumber
 }    
 
-let game = createGame()
-game()
+let game = createGame();
+game();
