@@ -116,10 +116,10 @@ if (appData.getTargetMonth() > 0){
 }
 console.log(appData.getStatusIncome());
 
-console.log('Наша программа включает в себя данные: ');
-for (let key in appData){
-  console.log('Свойство: ' + key + ' Значение: ' + appData[key]);
-}
+// console.log('Наша программа включает в себя данные: ');
+// for (let key in appData){
+//   console.log('Свойство: ' + key + ' Значение: ' + appData[key]);
+// }
 appData.getInfoDeposit();
 appData.calcSavedMoney();
 
