@@ -38,6 +38,7 @@ list[52].after(list[53]);
 list[53].after(list[51]);
 list[51].after(list[54]);
 list[3].after(list[6]);
+list[9].after(list[2]);
 
 newElem.textContent = 'Глава 8: За пределами ES6';
 ul[2].append(newElem);
