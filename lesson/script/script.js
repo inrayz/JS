@@ -1,48 +1,81 @@
-'use strict';
+'use strict'
 
-let isNumber = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
+let isNumber = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n)
+}
 
 
-let createGame = function() {
-  let a = Math.floor(Math.random() * 101);
-  console.log(a);
+let createGame = function(){
+  let correctNumber = Math.floor(Math.random() * 101),
+      setValue = 10
   
-  let getNumber = function(){
-    let getWish = function(flag){
-      if(flag){
-        getNumber();
-      } else{
-        alert('Спасибо, что поирали');
-      }
-    };
+    console.log("Загаданное число", correctNumber)
 
+
+
+  let getWish = function(flag) { 
+    if (flag) {
+      getNumber()
+    } else {
+      alert('Спасибо, что поиграли')
+    }
+  }
+
+  
+  let counterTry = function(userTry) { 
+    userTry--
+    return userTry
+  }
+
+  
+  let incorrectAnswer = function(wish) {
+    setValue = counterTry(setValue)
+    getWish(wish)
+  }
+
+  let getNumber = function() {
+ 
     let wish,
-        userNumber = prompt('Угадайте число от 1 до 100');
-
-    if(userNumber === null){
-      alert('В следующий раз');
+        userNumber = prompt('Угадай число от 1 до 100')
+    
+    if (userNumber === null) {
+      alert('Может, в следующий раз...')
+    }
+    else if (!isNumber(userNumber) || (parseFloat(userNumber) > 100)){
+      wish = confirm('Введи число от 0 до 100!')
+      getWish(wish)
+    }
+    else if (userNumber == correctNumber) {
+      wish = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')
+      if (wish) {
+        correctNumber = Math.floor(Math.random() * 101)
+        setValue = 10
+        console.log("Загаданное число", correctNumber)
+        game()
+      }
     } 
-    else if(!isNumber(userNumber) || parseFloat(userNumber) > 100){
-      wish = confirm('Введите число от 1 до 100');
-      getWish(wish);
+    else if (setValue > 1) { 
+      if (userNumber < correctNumber) {
+        wish = confirm('Загаданное число больше, осталось попыток ' + counterTry(setValue))
+        incorrectAnswer(wish)
+      }
+      else if (userNumber > correctNumber) {
+        wish = confirm('Загаданное число меньше, осталось попыток ' + counterTry(setValue))
+        incorrectAnswer(wish)
+      }
+    } 
+    else if (setValue === 1) {
+      wish = confirm('Попытки закончились, хотите сыграть еще?')
+      if (wish) {
+        correctNumber = Math.floor(Math.random() * 101)
+        setValue = 10
+        console.log("Загаданное число", correctNumber)
+        game()
+      }
     }
-    else if (userNumber == a){
-      alert('Ты угадал!!!');
-    }
-    else if (userNumber > a){
-      wish = confirm('Загаданное число меньше. Попробуй еще раз');
-      getWish(wish);
-    }
-    else if (userNumber < a){
-      wish = confirm('Загаданное число больше. Попробуй еще раз');
-      getWish(wish);
-    }
-  };
-  return getNumber;
-};
+  }
+  return getNumber
+}    
 
-let game = createGame();
-game();
-console.dir(game);
+let game = createGame()
+game()
