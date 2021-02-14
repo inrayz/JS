@@ -23,11 +23,25 @@ let starts = document.getElementById('start'),
     periodSelect = document.querySelector('.period-select'),
     incomeItem = document.querySelectorAll('.income-items');
 
+periodSelect.addEventListener('input', function(){
+    let period = document.querySelector('.period-amount'); 
+    period.innerHTML = periodSelect.value;
+});
 
 
 let isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
+
+salary.addEventListener("input", ButtonED);
+function ButtonED(){
+  if (salary.value === ""){
+    starts.disabled = true;
+  } else {
+    starts.disabled = false;
+  }
+}
+ButtonED();
 
 let temp;
 
@@ -45,10 +59,10 @@ let appData = {
     persentDeposit: 0,
     moneyDeposit: 0,
     start: function() {
-      if(salary.value === ''){
-        alert('Ошибка, поле "Месячный доход" должно быть заполнено!')
-        return;
-      }
+      // if(salary.value === ''){
+      //   alert('Ошибка, поле "Месячный доход" должно быть заполнено!')
+      //   return;
+      // }
       appData.budget = +salary.value;
 
       appData.getExpenses();
@@ -66,7 +80,7 @@ let appData = {
       expensesMonthValue.value = appData.expensesMonth;
       additionalExpensesValue.value = appData.addExpenses.join(', ');
       additionalIncomeValue.value = appData.addIncome.join(', ');
-      targetMonthValue.value = appData.getTargetMonth();
+      targetMonthValue.value = appData.getTargetMonth(); 
       incomePeriodValue.value = appData.calcSavedMoney();
     },
     addExpensesBlock: function(){
@@ -169,10 +183,7 @@ btn1.addEventListener('click', appData.addIncomeBlock);
 
 start.addEventListener('click', appData.start);
 
-periodSelect.addEventListener('input', function(){
-    let period = document.querySelector('.period-amount'); 
-    period.innerHTML= periodSelect.value;
-});
+
 
 // if (appData.getTargetMonth() > 0){
 //   console.log('Срок достижения цели в месяцах:', appData.getTargetMonth());
