@@ -82,6 +82,9 @@ let appData = {
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = appData.getTargetMonth(); 
       incomePeriodValue.value = appData.calcSavedMoney();
+      periodSelect.addEventListener('input', function(){
+        incomePeriodValue.value = appData.calcSavedMoney();
+      });
     },
     addExpensesBlock: function(){
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
