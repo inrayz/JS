@@ -36,11 +36,12 @@ const render = function(){
       });
 
       const btnTodoRemove = li.querySelector('.todo-remove');
-
       btnTodoRemove.addEventListener('click', function(){
-        todoData.splice(item, 1);
+        let idx = todoData.indexOf(item);
+        todoData.splice(idx, 1);
         localStorage.setItem('todoData', JSON.stringify(todoData));
         render();
+        console.log(item);
       });
       const inputs = document.querySelectorAll('input[type=text]');
       for (var i = 0;  i < inputs.length; i++) {
