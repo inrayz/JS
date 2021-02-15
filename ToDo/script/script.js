@@ -38,14 +38,17 @@ const render = function(){
       const btnTodoRemove = li.querySelector('.todo-remove');
 
       btnTodoRemove.addEventListener('click', function(){
-        li.remove();
+        todoData.splice(item, 1);
         localStorage.setItem('todoData', JSON.stringify(todoData));
+        render();
       });
       const inputs = document.querySelectorAll('input[type=text]');
       for (var i = 0;  i < inputs.length; i++) {
           inputs[i].value = '';
       }
+      
     }); 
+    
 };
 
 todoControl.addEventListener('submit', function(event){
