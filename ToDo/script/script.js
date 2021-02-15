@@ -62,6 +62,5 @@ todoControl.addEventListener('submit', function(event){
     render();
   }
 });
-todoData=JSON.parse(localStorage.getItem('todoData'));
+todoData = localStorage.todoData ? JSON.parse(localStorage.todoData) : [];
 render();
-//перезалил
