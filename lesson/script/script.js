@@ -170,13 +170,13 @@ let appData = {
         if(expensesItems.length === 3){
           btn2.style.display = 'none';
         }
-    },
+    }, 
     getExpenses: function(){
-      expensesItems.forEach(function(item){
+      expensesItems.forEach((item) =>{
           let itemExpenses = item.querySelector('.expenses-title').value;
           let cashExpenses = item.querySelector('.expenses-amount').value;
           if(itemExpenses !== '' && cashExpenses !== ''){
-            appData.expenses[itemExpenses] = cashExpenses;
+            this.expenses[itemExpenses] = +cashExpenses;
           }
       });
     },
@@ -206,7 +206,7 @@ let appData = {
         addExpenses.forEach(function(item){
           item = item.trim();
           if ( item !== ''){
-            this.addExpenses.push(item);
+            appData.addExpenses.push(item);
           }
         });
     },
@@ -257,6 +257,5 @@ let appData = {
 
 btn2.addEventListener('click', appData.addExpensesBlock);
 btn1.addEventListener('click', appData.addIncomeBlock);
-
 starts.addEventListener('click', appData.start.bind(appData));
 calcClearButton.addEventListener('click', appData.reset.bind(appData));
