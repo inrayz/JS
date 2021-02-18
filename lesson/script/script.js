@@ -1,10 +1,13 @@
 'use strict';
 
-let starts = document.getElementById('start'),
-calcClearButton = document.getElementById('cancel'),
+const starts = document.getElementById('start'),
+    calcClearButton = document.getElementById('cancel'),
     btn2 = document.getElementsByTagName('button')[1],
     btn1 = document.getElementsByTagName('button')[0],
-    checkbox = document.querySelector('#deposit-check'),
+    depositCheckBox = document.querySelector('#deposit-check'),
+    depositCheckElement = document.querySelector('.deposit-check'),
+    depositAmountElement = document.querySelector('.deposit-amount'),
+    depositPercentElement = document.querySelector('.deposit-percent'),
     additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
     budgetMonthValue = document.getElementsByClassName('result-total')[0],
     budgetDayValue = document.getElementsByClassName('result-total')[1],
@@ -17,13 +20,13 @@ calcClearButton = document.getElementById('cancel'),
     incomeTitle = document.querySelector('.income-items>.income-title'),
     incomeAmount = document.querySelector('.income-items>.income-amount'),
     expensesTitle = document.querySelector('.expenses-items>.expenses-title'),
-    expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('.income-items'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
     periodAmount = document.querySelector('.period-amount'),
     incomeItem = document.querySelectorAll('.income-items');
+    let expensesItems = document.querySelectorAll('.expenses-items'),
+    incomeItems = document.querySelectorAll('.income-items');
 const isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -117,6 +120,7 @@ class appData{
         this.budgetDay = 0;
         this.budgetMonth = 0;
         this.expensesMonth = 0;
+        depositCheckBox.checked = false;
     }
     disableFields () {
         starts.style.display="none";
@@ -226,11 +230,11 @@ class appData{
       }
     }
     getInfoDeposit () {
-      if(appData.deposit){
-        do{appData.percentDeposit = prompt('Какой годовой процент');}
-        while(!isNumber(appData.percentDeposit));
-        do{appData.moneyDeposit = prompt('Какая сумма заложена');}
-        while(!isNumber(appData.moneyDeposit));
+      if(this.deposit){
+        do{this.percentDeposit = prompt('Какой годовой процент');}
+        while(!isNumber(this.percentDeposit));
+        do{this.moneyDeposit = prompt('Какая сумма заложена');}
+        while(!isNumber(this.moneyDeposit));
       }
     }
     changePeriodValue() {
