@@ -48,7 +48,7 @@ class appData{
   }
   
   start () {
-      if (salary.value == '') {
+      if (salary.value === '') {
             return;
         }
 
