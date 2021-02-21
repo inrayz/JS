@@ -44,7 +44,7 @@ class appData{
     this.budgetDay= 0;
     this.budgetMonth= 0;
     this.expensesMonth= 0;
-    this.persentDeposit= 0;
+    this.percentDeposit= 0;
     this.moneyDeposit= 0;
   }
   
@@ -225,6 +225,9 @@ class appData{
     getBudget() {
       const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
       this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
+      console.log(this.moneyDeposit);
+      console.log(this.percentDeposit);
+      console.log(monthDeposit);
       this.budgetDay = Math.floor(this.budgetMonth / 30);
     }
     getTargetMonth () {
@@ -262,7 +265,7 @@ class appData{
       } else {
         depositPercent.value = valueSelect;
         depositPercent.style.display = 'none';
-        depositPercent.value = +valueSelect * 100;
+        
       }
     }
     depositHandler (){
@@ -280,15 +283,15 @@ class appData{
           depositBank.removeEventListener('change', this.changePercent);
         }
     }
-    checkPercent(event) {
-    if ((event.target.value > 100) && this.isNumber(event.target.value)) {
-      event.target.value = 100;
-    } else if ((event.target.value < 0) && this.isNumber(event.target.value)) {
-      event.target.value = 0;
-    } else if (!this.isNumber(event.target.value)) {
-      event.target.value = '';
-    }
-  }
+  //   checkPercent(event) {
+  //   if ((event.target.value > 100) && this.isNumber(event.target.value)) {
+  //     event.target.value = 100;
+  //   } else if ((event.target.value < 0) && this.isNumber(event.target.value)) {
+  //     event.target.value = 0;
+  //   } else if (!this.isNumber(event.target.value)) {
+  //     event.target.value = '';
+  //   }
+  // }
   validation() {
         const allInputs = document.querySelectorAll('.data input[type= "text"]');
         allInputs.forEach((item) => {
@@ -351,7 +354,7 @@ class appData{
             }
         });
         depositCheck.addEventListener('change', this.depositHandler.bind(this));
-        depositPercent.addEventListener('input', this.checkPercent.bind(this));
+        // depositPercent.addEventListener('input', this.checkPercent.bind(this));
     }
 }
 
