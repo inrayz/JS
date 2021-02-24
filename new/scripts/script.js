@@ -55,7 +55,6 @@ window.addEventListener('DOMContentLoaded', function(){
   toggleMenu();
 
   //popup
-
   const togglePopUp = () => {
       const popup = document.querySelector('.popup'),
           popupBtn = document.querySelectorAll('.popup-btn'),
