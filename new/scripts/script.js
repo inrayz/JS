@@ -62,6 +62,7 @@ window.addEventListener('DOMContentLoaded', function(){
 					popupContent = popup.querySelector('.popup-content'),
          	popupContentRect =  popupContent.getBoundingClientRect(),
          	popupContentX = popupContentRect.x;
+      popupClose.addEventListener('click', () =>  popup.style.display = 'none');
 			function animationPopUp(){
 				let animationId;
 				let count = -1200;
@@ -76,13 +77,16 @@ window.addEventListener('DOMContentLoaded', function(){
 						};
 				animationFunc();			
 			}
-      popupBtn.forEach(elem => elem.addEventListener('click', () => {
+      let width;
+      window.addEventListener(`resize`, function(){
+        width = document.documentElement.clientWidth;
+      });
+       popupBtn.forEach(elem => elem.addEventListener('click', () => {
           popup.style.display = 'block';
-					if (screen.width > 768){
+					if (width > 768){
 						animationPopUp();
 					}
 			}));  
-      popupClose.addEventListener('click', () =>  popup.style.display = 'none');
   };
   togglePopUp();
 });
