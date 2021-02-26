@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', function(){
 						};
 				animationFunc();			
 			}
-      let width;
+      let width = document.documentElement.clientWidth;
       window.addEventListener(`resize`, function(){
         width = document.documentElement.clientWidth;
       });
