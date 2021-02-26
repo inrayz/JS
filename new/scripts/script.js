@@ -38,7 +38,6 @@ window.addEventListener('DOMContentLoaded', function(){
     updateClock();
   }
   countTimer('27 feb 2021');
-
   // Меню 
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
