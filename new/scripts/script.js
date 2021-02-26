@@ -53,7 +53,6 @@ window.addEventListener('DOMContentLoaded', function(){
     menuItems.forEach((elem)=> elem.addEventListener('click',handlerMenu));
   };
   toggleMenu();
-
   //popup
   const togglePopUp = () => {
       const popup = document.querySelector('.popup'),
