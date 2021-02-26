@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', function(){
   'use strict';
+
+
   //Timer
   function countTimer(deadline){
     let timerHours = document.querySelector('#timer-hours'),
@@ -38,6 +40,8 @@ window.addEventListener('DOMContentLoaded', function(){
     updateClock();
   }
   countTimer('27 feb 2021');
+
+
   // Меню 
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
@@ -52,6 +56,8 @@ window.addEventListener('DOMContentLoaded', function(){
     menuItems.forEach((elem)=> elem.addEventListener('click',handlerMenu));
   };
   toggleMenu();
+
+   
   //popup
   const togglePopUp = () => {
       const popup = document.querySelector('.popup'),
