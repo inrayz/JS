@@ -436,7 +436,7 @@ window.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('input').forEach(e => e.addEventListener('input', ()=> {
       let valid = 0;
       for(let val of new FormData(form).entries()){
-        if(val[1]==='') {
+        if(val[1] === '') {
           valid +=1;
         }
       }
