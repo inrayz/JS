@@ -427,9 +427,25 @@ window.addEventListener('DOMContentLoaded', function(){
         successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const form = document.getElementById(selector);
-    const email = document.getElementById('form1-email');
+    // const email = document.getElementById('form1-email');
 
-    email.setAttribute('required', 'required');
+    // email.setAttribute('required', 'required');
+    const buttons = document.querySelectorAll('button[type=submit]');
+    const bNum = selector[4]-1;
+    buttons.forEach(e => e.setAttribute("disabled", "disabled"));
+    document.querySelectorAll('input').forEach(e => e.addEventListener('input', ()=> {
+      let valid = 0;
+      for(let val of new FormData(form).entries()){
+        if(val[1]==='') {
+          valid +=1;
+        }
+      }
+        if(valid){         
+          buttons[bNum].setAttribute('disabled',  "disabled");
+        } else {
+          buttons[bNum].removeAttribute('disabled');
+        }
+    }));
     
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 2rem;';
@@ -447,15 +463,16 @@ window.addEventListener('DOMContentLoaded', function(){
       });
       postData(body, () => {
         clearInputs(form);
-        
         statusMessage.textContent = successMessage;
         statusMessage.style.cssText = '';
+        buttons[bNum].setAttribute('disabled', 'disabled');
       }, (error) => {
         clearInputs(form);
         console.error(error);
         
         statusMessage.textContent = errorMessage;
         statusMessage.style.cssText = '';
+        buttons[bNum].setAttribute('disabled', 'disabled');
       });
     });
     const clearInputs = (form) => {
