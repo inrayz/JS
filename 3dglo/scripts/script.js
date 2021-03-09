@@ -427,6 +427,9 @@ window.addEventListener('DOMContentLoaded', function(){
         successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const form = document.getElementById(selector);
+    const email = document.getElementById('form1-email');
+
+    email.setAttribute('required', 'required');
     
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 2rem;';
