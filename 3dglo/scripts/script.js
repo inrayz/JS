@@ -459,42 +459,42 @@ window.addEventListener('DOMContentLoaded', function(){
       formData.forEach((val, key) => {
         body[key] = val;
       });
-      postData(body)
-        .then(()=>{
-          statusMessage.textContent = successMessage;
-        })
-        .catch((error)=>{
-          console.log(error);
-          statusMessage.textContent = errorMessage;
-        })
-        .finally(updatePage);
+      
+      fetch('./server.php', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }).then((response) => {
+        if (response.status !== 200) {
+          throw new Error(`Что-то пошло не так, код ошибки - ${response.status}`);
+        }
+        statusMessage.textContent = successMessage;
+        updatePage();
+      })
+      .catch((error) => {
+        console.log(error);
+        statusMessage.textContent = errorMessage;
+        updatePage();
+      });
     });
     const updatePage = () => {
       clearInputs(form);
       statusMessage.style.cssText = '';
       buttons[bNum].setAttribute('disabled', 'disabled');
+      setTimeout(() => {
+        statusMessage.textContent = '';
+      }, 3000);
+      if(selector === "form3"){
+        setTimeout(()=>{
+          document.querySelector('.popup').style.display = 'none';
+        }, 2000);
+      }
     };
     const clearInputs = (form) => {
       const inputs = form.querySelectorAll('input');
       inputs.forEach(item => item.value = '');
-    };
-    const postData = (body) => {
-      return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        request.addEventListener('readystatechange', () => {
-          if (request.readyState !== 4) {
-            return;
-          }
-          if (request.status === 200) {
-            resolve();            
-          } else {
-            reject(request.Status);  
-          }
-        });
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-type', 'application/json');
-        request.send(JSON.stringify(body));
-      });
     };
   };
 
