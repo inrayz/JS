@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', function(){
         timerSeconds = document.querySelector('#timer-seconds');
     
     const getTimeRemaining = () => {
-       const dateStop = new Date(deadline).getTime(),
+      const dateStop = new Date(deadline).getTime(),
         dateNow = new Date().getTime(),
         timeRemaining = (dateStop - dateNow) / 1000,
         seconds = Math.floor(timeRemaining % 60),
@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function(){
             if (n < 10){
                 return "0" + n;
             }
-             return n;
+            return n;
         }
     function updateClock(){
       let timer = getTimeRemaining();
@@ -104,11 +104,11 @@ window.addEventListener('DOMContentLoaded', function(){
   //popup
   const togglePopUp = () => {
       const popup = document.querySelector('.popup'),
-          popupBtn = document.querySelectorAll('.popup-btn'),
-          popupClose = document.querySelector('.popup-close'),
-					popupContent = popup.querySelector('.popup-content'),
-         	popupContentRect =  popupContent.getBoundingClientRect(),
-         	popupContentX = popupContentRect.x;
+        popupBtn = document.querySelectorAll('.popup-btn'),
+        popupClose = document.querySelector('.popup-close'),
+				popupContent = popup.querySelector('.popup-content'),
+        popupContentRect =  popupContent.getBoundingClientRect(),
+        popupContentX = popupContentRect.x;
 			function animationPopUp(){
 				let animationId;
 				let count = -1200;
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', function(){
       window.addEventListener(`resize`, function(){
         width = document.documentElement.clientWidth;
       });
-       popupBtn.forEach(elem => elem.addEventListener('click', () => {
+      popupBtn.forEach(elem => elem.addEventListener('click', () => {
           popup.style.display = 'block';
 					if (width > 768){
 						animationPopUp();
@@ -427,9 +427,7 @@ window.addEventListener('DOMContentLoaded', function(){
         successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const form = document.getElementById(selector);
-    // const email = document.getElementById('form1-email');
-
-    // email.setAttribute('required', 'required');
+  
     const buttons = document.querySelectorAll('button[type=submit]');
     const bNum = selector[4]-1;
     buttons.forEach(e => e.setAttribute("disabled", "disabled"));
@@ -461,41 +459,43 @@ window.addEventListener('DOMContentLoaded', function(){
       formData.forEach((val, key) => {
         body[key] = val;
       });
-      postData(body, () => {
-        clearInputs(form);
-        statusMessage.textContent = successMessage;
-        statusMessage.style.cssText = '';
-        buttons[bNum].setAttribute('disabled', 'disabled');
-      }, (error) => {
-        clearInputs(form);
-        console.error(error);
-        
-        statusMessage.textContent = errorMessage;
-        statusMessage.style.cssText = '';
-        buttons[bNum].setAttribute('disabled', 'disabled');
-      });
+      postData(body)
+        .then(()=>{
+          statusMessage.textContent = successMessage;
+        })
+        .catch((error)=>{
+          console.log(error);
+          statusMessage.textContent = errorMessage;
+        })
+        .finally(updatePage);
     });
+    const updatePage = () => {
+      clearInputs(form);
+      statusMessage.style.cssText = '';
+      buttons[bNum].setAttribute('disabled', 'disabled');
+    };
     const clearInputs = (form) => {
       const inputs = form.querySelectorAll('input');
       inputs.forEach(item => item.value = '');
     };
-    const postData = (body, outputData, errorData) => {
-      const request = new XMLHttpRequest();
-      request.addEventListener('readystatechange', () => {       
-        if (request.readyState !== 4){
-          return;
-        }
-        if (request.status === 200){
-          outputData();    
-        } else {
-          errorData(request.status);
-        }
+    const postData = (body) => {
+      return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+          if (request.readyState !== 4) {
+            return;
+          }
+          if (request.status === 200) {
+            resolve();            
+          } else {
+            reject(request.Status);  
+          }
+        });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send(JSON.stringify(body));
       });
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(body));
     };
-
   };
 
   sendForm('form1');
