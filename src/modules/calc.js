@@ -26,7 +26,7 @@ const calc = (price = 100) => {
       }
 
       if (typeValue && squareValue){
-        total = price * typeValue * squareValue * countValue * dayValue;
+        total = Math.round(price * typeValue * squareValue * countValue * dayValue);
       }  
       let x = 1;
       const animateNumbers = () => {

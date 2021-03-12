@@ -1,47 +1,53 @@
-'use strict'
+'use strict';
 const togglePopUp = () => {
-      const popup = document.querySelector('.popup'),
-        popupBtn = document.querySelectorAll('.popup-btn'),
-        popupClose = document.querySelector('.popup-close'),
-				popupContent = popup.querySelector('.popup-content'),
-        popupContentRect =  popupContent.getBoundingClientRect(),
-        popupContentX = popupContentRect.x;
-			function animationPopUp(){
-				let animationId;
-				let count = -1200;
-				popupContent.style.transform = `translate(${count}px)`;
-						const animationFunc = () => {
-							animationId = requestAnimationFrame(animationFunc);
-							count += 50;
-								if (count >= popupContentX - 50){
-									cancelAnimationFrame(animationId);
-								}
-							popupContent.style.transform = `translate(${count}px)`;	
-						};
-				animationFunc();			
-			}
-      let width = document.documentElement.clientWidth;
-      window.addEventListener(`resize`, function(){
-        width = document.documentElement.clientWidth;
-      });
-      popupBtn.forEach(elem => elem.addEventListener('click', () => {
-          popup.style.display = 'block';
-					if (width > 768){
-						animationPopUp();
-					}
-			}));  
-      popup.addEventListener('click', (event) => {
-        let target = event.target;
+  const popup = document.querySelector('.popup'),
+    popupBtn = document.querySelectorAll('.popup-btn'),
+    popUpClose = document.querySelector('.popup-close'),
+    popupForm = popup.querySelector('form'),
+    popupWindow = popup.querySelector('div');
 
-        if(target.classList.contains('popup-close')){
-          popup.style.display = 'none';
-        }else{
-          target = target.closest('.popup-content');
-            if(!target){
-                popup.style.display = 'none';
-            }
-        }
-      });
-  };
+  let counter = 0;
 
-  export default togglePopUp;
+  function appearAnimation() {
+
+    popup.style.display = 'block';
+    popupWindow.style.transform = 'scale(0)';
+
+    if (document.documentElement.clientWidth >= 768) {
+
+      counter += 10;
+      popupWindow.style.transform = `scale(${counter / 100})`;
+
+      if (counter <= 100) {
+        requestAnimationFrame(appearAnimation);
+      }
+
+    } else {
+
+      popupWindow.style.transform = 'scale(1)';
+
+    }
+  }
+
+  function disappearAnimation() {
+    popup.style.display = 'none';
+    counter = 0;
+  }
+
+  popupBtn.forEach(element => {
+    element.addEventListener('click', () => {
+      requestAnimationFrame(appearAnimation);
+    });
+  });
+
+  popup.addEventListener('click', event => {
+    if (event.target === popup || event.target === popUpClose) {
+      disappearAnimation();
+    }
+  });
+
+  popupForm.addEventListener('submit', disappearAnimation);
+
+};
+
+export default togglePopUp;
