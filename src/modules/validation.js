@@ -4,9 +4,15 @@ const validation = () => {
 
     let onFocus = false;
 
+    const namePerson = document.getElementById('form1-name');
+
+    function valid(){
+      console.log(namePerson.value);
+    }
+
     const checkBlur = event => {
       event.target.value = event.target.value.replace(/-+(?=-+)| +(?= +)|-+(?= +)| +(?=-+)|^ +| +$|^-+|-+$/ig, '');
-      if (event.target.name === 'user_name') {
+      if (event.target.name === 'user_name' || event.target.value.length < 2) {
         event.target.value = event.target.value.split(' ').map(item => item[0].toUpperCase() + item.slice(1).toLowerCase()).join(' ');
       }
       event.target.removeEventListener('blur', checkBlur);
@@ -29,7 +35,7 @@ const validation = () => {
       event.target.value = event.target.value.replace(/[^а-я- ]|-(?=-)| (?= )/ig, '');
       checkFocus(event);
     };
-    
+
     const checkInputMess = event => {
       event.target.value = event.target.value.replace(/[^а-я- ,.!?'()0-9]/ig, '');
       checkFocus(event);
@@ -60,3 +66,4 @@ const validation = () => {
   };
 
   export default validation;
+  

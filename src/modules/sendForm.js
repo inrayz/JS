@@ -6,6 +6,7 @@ const sendForm = (selector) => {
         successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const form = document.getElementById(selector);
+    const namePerson = document.getElementById('form1-name');
   
     const buttons = document.querySelectorAll('button[type=submit]');
     const bNum = selector[4]-1;
@@ -17,7 +18,7 @@ const sendForm = (selector) => {
           valid +=1;
         }
       }
-        if(valid){         
+        if(valid || namePerson.value.length < 2){         
           buttons[bNum].setAttribute('disabled',  "disabled");
         } else {
           buttons[bNum].removeAttribute('disabled');
